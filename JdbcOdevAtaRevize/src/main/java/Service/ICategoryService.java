@@ -1,17 +1,14 @@
-package Controler;
+package Service;
 
 import Entity.Category;
-import Utility.Singleton;
 
 import java.util.List;
 
-public interface ICategoryControler {
+public interface ICategoryService {
 
     public boolean createCategory(String categoryName);
-
     public boolean deleteCategory(String categoryName);
-
     public Category getCategoryName(String categoryName);
-
     public List<Category> getCategory();
+
 }

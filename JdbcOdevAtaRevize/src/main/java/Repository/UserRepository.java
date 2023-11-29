@@ -100,14 +100,16 @@ public class UserRepository implements IUserRepository {
 
     }
 
-    public boolean updateUsersMail(Users users){
-        connection = dbConnect.getConnection(); // connetion açtık
-        String mailUpdate = "UPDATE users SET email = '"+users.geteMail()+"'  WHERE email ='"+users.geteMail()+"'";
-
+    public boolean updateUsersMail(Users users,String updateMail){
+       // connetion açtık
+        Users userIsExist=getUsersControl(users.geteMail(), users.getPassword());
+        String mailUpdate = "update users set email = '"+updateMail+"'  where id='"+userIsExist.getId()+" '";
+        connection = dbConnect.getConnection();
         try {
             PreparedStatement ps = connection.prepareCall(mailUpdate);
             ps.executeUpdate();
-            System.out.println("Kullanıcı mail adresi güncellendi= "+ users.geteMail());
+            System.err.println("Kullanıcı mail adresi güncellendi= "+ users.geteMail());
+
             return true;
         }
         catch (SQLException s){
@@ -119,6 +121,7 @@ public class UserRepository implements IUserRepository {
         }
         return false;
     }
+
 
     public boolean updateUsersName(Users users){
         connection = dbConnect.getConnection(); // connetion açtık

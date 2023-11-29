@@ -6,8 +6,13 @@ import Utility.Singleton;
 
 import java.util.List;
 
-public class CategoryService{
-    CategoryRepository categoryRepository = Singleton.getCategoryRepository();
+public class CategoryService implements  ICategoryService{
+
+    ICategoryRepository categoryRepository;
+
+    public CategoryService(){
+        categoryRepository = Singleton.getCategoryRepository();
+    }
 
     public boolean createCategory(String categoryName){
             if (categoryRepository.categoryGetByName(categoryName).getId()==0){
@@ -42,8 +47,7 @@ public class CategoryService{
         }
 
     }
-
-    public boolean getCategory() {
-        categoryRepository.getCategory();
-        return true;
-    }}
+    public List<Category> getCategory() {
+        return  categoryRepository.getCategory();
+    }
+}
