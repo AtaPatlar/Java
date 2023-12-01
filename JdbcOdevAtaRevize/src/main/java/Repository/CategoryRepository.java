@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryRepository implements ICategoryRepository {
-    DbConnect dbConnect = Singleton.getDbConnect();
+    DbConnect dbConnect;
     Connection connection = null;
+    public CategoryRepository(){
+        dbConnect = Singleton.getDbConnect();
+    }
 
     public boolean createCategory(String categoryName){
 
@@ -103,7 +106,6 @@ return null;
                 Category category = new Category();
                 category.setId(resultSet.getInt("id"));
                 category.setCategoryName(resultSet.getString("name"));
-
 
                categoryList.add(category);
                System.out.println(category);

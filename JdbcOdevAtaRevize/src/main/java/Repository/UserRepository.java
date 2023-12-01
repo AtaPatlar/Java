@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
-    DbConnect dbConnect = Singleton.getDbConnect();
+    DbConnect dbConnect;
     Connection connection = null;
 
+    public UserRepository(){
+        dbConnect = Singleton.getDbConnect();
+    }
     public boolean createUsers(Users users){
     connection = dbConnect.getConnection(); // connection açtık
 
@@ -108,7 +111,7 @@ public class UserRepository implements IUserRepository {
         try {
             PreparedStatement ps = connection.prepareCall(mailUpdate);
             ps.executeUpdate();
-            System.err.println("Kullanıcı mail adresi güncellendi= "+ users.geteMail());
+            System.out.println("Kullanıcı mail adresi güncellendi= "+ users.geteMail());
 
             return true;
         }

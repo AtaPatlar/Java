@@ -15,13 +15,12 @@ import java.util.Scanner;
 public class UserService implements IUserService {
     IUserRepository userRepository;
     Scanner scs = new Scanner(System.in);
-    Users users = new Users();
-
     public UserService(){
         userRepository = new UserRepository();
     }
 
     public boolean getUserControl(String email, String password) {
+        Users users = new Users();
         users.seteMail(email);
         users.setPassword(password);
         if (userRepository.getUsersControl(users.geteMail(),users.getPassword()).getId()!=0){
@@ -33,9 +32,10 @@ public class UserService implements IUserService {
         }
     }
     public boolean createUsersService(String email1, String password1){
-        users.seteMail(email1);
-        users.setPassword(password1);
-        if (userRepository.getUsersControl(users.geteMail(),users.getPassword()).getId()!=0){
+        Users users1 = new Users();
+        users1.seteMail(email1);
+        users1.setPassword(password1);
+        if (userRepository.getUsersControl(users1.geteMail(),users1.getPassword()).getId()!=0){
             System.out.println("Kullanıcı zaten kayıtlı");
             return false;
         }
@@ -53,25 +53,31 @@ public class UserService implements IUserService {
         }
     }
     public boolean usersUpdateMail(String updateMail,String email,String password){
+        Users users2 = new Users();
 
-              users.seteMail(email);
-              users.setPassword(password);
-              //userRepository.updateUsersMail(users);
-              return userRepository.updateUsersMail(users, updateMail);
+              users2.seteMail(email);
+              users2.setPassword(password);
+              return userRepository.updateUsersMail(users2, updateMail);
     }
-    public boolean usersUpdateName(String name){
-            users.setName(name);
-            userRepository.updateUsersName(users);
+    public boolean usersUpdateName(String name ,String email){
+        Users users2 = new Users();
+            users2.setName(name);
+            users2.seteMail(email);
+            userRepository.updateUsersName(users2);
             return true;
     }
-    public boolean usersUpdateLastName(String lastname){
-            users.setSurname(lastname);
-            userRepository.updateUsersLastName(users);
+    public boolean usersUpdateLastName(String lastname,String email){
+        Users users2 = new Users();
+            users2.setSurname(lastname);
+            users2.seteMail(email);
+            userRepository.updateUsersLastName(users2);
             return true;
     }
-    public boolean usersUpdatePassword(String password){
-            users.setPassword(password);
-            userRepository.updateUsersPassword(users);
+    public boolean usersUpdatePassword(String password,String email){
+        Users users2 = new Users();
+            users2.setPassword(password);
+            users2.seteMail(email);
+            userRepository.updateUsersPassword(users2);
             return true;
     }
     public List<Users> getUsers(){

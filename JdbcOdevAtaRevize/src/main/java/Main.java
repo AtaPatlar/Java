@@ -1,7 +1,7 @@
-import Controler.CategoryControler;
-import Controler.ICategoryControler;
-import Controler.IUserContoler;
-import Controler.UserControler;
+import Controler.CategoryController;
+import Controler.ICategoryController;
+import Controler.IUserContoller;
+import Controler.UserController;
 import java.util.Scanner;
 
 public class Main {
@@ -13,17 +13,18 @@ public class Main {
         int choose1, choose2 ,choose3;
         String chooseS1,chooseS3,email,password,name,lastname,email1,password1;
 
-        IUserContoler userControler;
-        ICategoryControler categoryControler;
-        categoryControler = new CategoryControler();
-        userControler = new UserControler();
+        IUserContoller userController;
+        ICategoryController categoryController;
+        categoryController = new CategoryController();
+        userController = new UserController();
 
         System.out.println("Emailnizi giriniz");
         email= scs.nextLine();
         System.out.println("Şifrenizi giriniz");
         password = scs.nextLine();
+        loop2=true;
 
-            if (userControler.getUserControl(email,password)){
+            if (userController.getUserControl(email,password)){
 
                 while (loop2) {
                     System.out.println("1.Kullanıcı işlemleri");
@@ -31,6 +32,8 @@ public class Main {
                     System.out.println("3.Çıkış");
                     System.out.println("Lütfen seçiminizi yapınız");
                     choose2 = sci.nextInt();
+                    loop1 = true;
+                    loop3 = true;
 
                     switch (choose2) {
 
@@ -54,32 +57,32 @@ public class Main {
                                     case 1:
                                         System.out.println("Güncellemek istediğiniz isminizi küçük harflerle giriniz.");
                                         name = scs.nextLine();
-                                        userControler.usersUpdateName(name);
+                                        userController.usersUpdateName(name,email);
                                         break;
                                     case 2:
                                         System.out.println("Güncellemek istediğiniz soyisminizi küçük harflerle giriniz.");
                                         lastname = scs.nextLine();
-                                        userControler.usersUpdateLastName(lastname);
+                                        userController.usersUpdateLastName(lastname,email);
                                         break;
                                     case 3:
                                         System.out.println("Güncellemek istediğiniz emailinizi küçük harflerle giriniz.");
                                         String email2 = scs.nextLine();
-                                        userControler.usersUpdateMail(email2,email,password);
+                                        userController.usersUpdateMail(email2,email,password);
                                         break;
                                     case 4:
                                         System.out.println("Güncellemek istediğiniz şifrenizi küçük harflerle giriniz.");
                                         password = scs.nextLine();
-                                        userControler.usersUpdatePassword(password);
+                                        userController.usersUpdatePassword(password,email);
                                         break;
                                     case 5:
                                         System.out.println("Emailinizi küçük harflerle giriniz.");
                                         email1 = scs.nextLine();
                                         System.out.println("şifrenizi giriniz.");
                                         password1 = scs.nextLine();
-                                        userControler.createUsersService(email1,password1);
+                                        userController.createUsersService(email1,password1);
                                         break;
                                     case 6:
-                                        userControler.getUsers();
+                                        userController.getUsers();
                                         break;
                                     case 7:
                                         System.out.println("Çıkış yapılıyor...");
@@ -104,23 +107,23 @@ public class Main {
                                 switch (choose3) {
                                     case 1:
                                         System.out.println("Kategori yarat işlemi seçildi.");
-                                        categoryControler.getCategory();
+                                        categoryController.getCategory();
                                         System.out.println("Kategori ismini giriniz:");
                                         chooseS1 = scs.nextLine();
-                                        categoryControler.createCategory(chooseS1);
+                                        categoryController.createCategory(chooseS1);
                                         // Burada category create işlemleri yapılır.
                                         break;
                                     case 2:
                                         System.out.println("Kategori sil işlemi seçildi.");
-                                        categoryControler.getCategory();
+                                        categoryController.getCategory();
                                         System.out.println("Silmek istediğiniz kategori ismini giriniz:");
                                         chooseS3 = scs.nextLine();
-                                        categoryControler.deleteCategory(chooseS3);
+                                        categoryController.deleteCategory(chooseS3);
                                         // Burada category delete işlemleri yapılır.
                                         break;
                                     case 3:
                                         System.out.println("Kategori bak işlemi seçildi.");
-                                        categoryControler.getCategory();
+                                        categoryController.getCategory();
                                         break;
                                     case 4:
                                         System.out.println("Programdan çıkılıyor.");
